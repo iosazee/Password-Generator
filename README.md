@@ -4,8 +4,17 @@
 
 The repo uses javascript to build a random password generator. Clicking the Generate Password button will trigger the app to randomly generate a password that meets the following criteria:
     1. Password consists of at least ten characters but no more than 64 characters.
-    2. Password must consists of a mix of alphabets(both upper and lower case), mumeric and special characters.
+    2. Password consists of at least one of lowercase, uppercase, numeric and special characters that may occur in any combination depending on the User's choice.
     3. The code should validate for each input.
+
+
+Screenshot of the app.
+
+<img src="assets/screenshot.png"  width="500px" />
+
+
+
+
 
 
 
