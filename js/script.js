@@ -91,29 +91,49 @@ let upperCasedCharacters = [
 // Function to prompt user for password options
 function getPasswordOptions() {
   
-  let passwordOptions = {
-    passwordLength: parseInt(prompt('How long should your password be?')),
-    lowercaseChar : confirm('Do you want your password to contain lower cased characters'),
-    uppercaseChar : confirm('Do you want your password to contain upper case characters?'),
-    numericChar : confirm('Do you want your password to contain numbers?'),
-    specialChar : confirm('Do you want your password to contain special characters?')
-  }
+   
+  let lowercaseChar = false;
+  let uppercaseChar = false;
+  let numericChar = false;
+  let specialChar = false;
+  let passwordLength = 0;
+
+  while (passwordLength < 10 || passwordLength > 64) {
+    passwordLength = prompt('How long should your password be?')
   
-  if (passwordOptions.passwordLength < 10 || passwordOptions.passwordLength > 64) {
+  if (passwordLength < 10 || passwordLength > 64) {
     alert('Please enter a length between 10 and 64?')
-    generatePassword();
+  
   } 
-  else if (passwordOptions.lowercaseChar == false && 
-          passwordOptions.uppercaseChar == false && 
-          passwordOptions.numericChar == false && 
-          passwordOptions.specialChar == false) {
+  }
+  while (lowercaseChar == false && 
+    uppercaseChar == false && 
+    numericChar == false && 
+    specialChar == false) {
+  
+  lowercaseChar = confirm('Do you want your password to contain lowercase characters?')
+  uppercaseChar = confirm('Do you want your password to contain uppercase characters?')
+  numericChar = confirm('Do you want your password to contain numbers?')
+  specialChar = confirm('Do you want your password to contain special characters?')
+
+  if (lowercaseChar == false && 
+      uppercaseChar == false && 
+      numericChar == false && 
+      specialChar == false) {
+            
     alert('You password must contain at least one character type')
-    generatePassword();
+    
   }
-  else {
-    return passwordOptions
-  }
-  return passwordOptions
+   
+    }
+
+  return  {passwordLength: passwordLength,
+          lowercaseChar: lowercaseChar,
+          uppercaseChar: uppercaseChar,
+          numericChar: numericChar,
+          specialChar: specialChar}
+  
+
 }
 
 
@@ -126,67 +146,50 @@ function getRandom() {
 
   let charArr = [];
 
-  //conditional if-else statement to cycle through all the possible choices the user may give.
-  if (userChoice.lowercaseChar && userChoice.uppercaseChar 
-        && userChoice.numericChar && userChoice.specialChar){
-    charArr = charArr.concat(lowerCasedCharacters).concat.apply(upperCasedCharacters)
-      .concat(numericCharacters).concat(specialCharacters)
-  }
-
-  else if (userChoice.numericChar && userChoice.uppercaseChar && userChoice.specialChar) {
-    charArr = charArr.concat(numericCharacters).concat(specialCharacters)
-      .concat(lowerCasedCharacters)
-  }
-
-  else if (userChoice.lowercaseChar && userChoice.numericChar && userChoice.specialChar) {
-    charArr = charArr.concat(numericCharacters)
-      .concat(specialCharacters).concat(lowerCasedCharacters)
-  }
-
-  else if (userChoice.uppercaseChar && userChoice.numericChar && userChoice.specialChar) {
-    charArr = charArr.concat(upperCasedCharacters)
-      .concat(numericCharacters).concat(specialCharacters)
-  }
-
-  else if (userChoice.lowercaseChar && userChoice.uppercaseChar) {
+  
+  if (userChoice.lowercaseChar && userChoice.uppercaseChar && userChoice.numericChar && userChoice.specialChar){
     charArr = charArr.concat(lowerCasedCharacters).concat(upperCasedCharacters)
+    .concat(numericCharacters).concat(specialCharacters)
   }
-
+  else if (userChoice.numericChar && userChoice.uppercaseChar && userChoice.specialChar) {
+    charArr = charArr.concat(numericCharacters).concat(specialCharacters).concat(lowerCasedCharacters)
+  }
+  else if (userChoice.lowercaseChar && userChoice.numericChar && userChoice.specialChar) {
+    charArr = charArr.concat(numericCharacters).concat(specialCharacters).concat(lowerCasedCharacters)
+  }
+  else if (userChoice.uppercaseChar && userChoice.numericChar && userChoice.specialChar) {
+    charArr = charArr.concat(upperCasedCharacters).concat(numericCharacters).concat(specialCharacters)
+  }
+  else if (userChoice.lowercaseChar && userChoice.uppercaseChar) {
+        charArr = charArr.concat(lowerCasedCharacters).concat(upperCasedCharacters)
+  } 
   else if (userChoice.lowercaseChar && userChoice.numericChar) {
-    charArr = charArr.concat(lowerCasedCharacters).concat(numericCharacters)
+        charArr = charArr.concat(lowerCasedCharacters).concat(numericCharacters)
   }
-
   else if (userChoice.lowercaseChar && userChoice.specialChar) {
-    charArr = charArr.concat(lowerCasedCharacters).concat(specialCharacters)
+        charArr = charArr.concat(lowerCasedCharacters).concat(specialCharacters)
   }
-
   else if (userChoice.uppercaseChar && userChoice.numericChar) {
-    charArr = charArr.concat(upperCasedCharacters).concat(numericCharacters)
+        charArr = charArr.concat(upperCasedCharacters).concat(numericCharacters)
   }
-
   else if (userChoice.uppercaseChar && userChoice.specialChar) {
-    charArr = charArr.concat(upperCasedCharacters).concat(specialCharacters)
+        charArr = charArr.concat(upperCasedCharacters).concat(specialCharacters)
   }
-
   else if (userChoice.numericChar && userChoice.specialChar) {
-    charArr = charArr.concat(numericCharacters).concat(specialCharacters)
+        charArr = charArr.concat(numericCharacters).concat(specialCharacters)
   }
-
   else if (userChoice.lowercaseChar) {
-    charArr = charArr.concat(lowerCasedCharacters)
+        charArr = charArr.concat(lowerCasedCharacters)
   }
-
   else if (userChoice.uppercaseChar) {
-    charArr = charArr.concat(upperCasedCharacters)
+        charArr = charArr.concat(upperCasedCharacters)
   }
-
   else if (userChoice.numericChar) {
-    charArr = charArr.concat(numericCharacters)
-}
-
-else {
+        charArr = charArr.concat(numericCharacters)
+  }
+  else {
         charArr = charArr.concat(specialCharacters)
-} 
+  } 
   
   let userPwd = ""
   console.log(charArr.length)
