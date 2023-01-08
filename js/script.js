@@ -152,13 +152,16 @@ function getRandom() {
     .concat(numericCharacters).concat(specialCharacters)
   }
   else if (userChoice.numericChar && userChoice.uppercaseChar && userChoice.specialChar) {
-    charArr = charArr.concat(numericCharacters).concat(specialCharacters).concat(lowerCasedCharacters)
+    charArr = charArr.concat(numericCharacters).concat(upperCasedCharacters).concat(specialCharacters)
   }
   else if (userChoice.lowercaseChar && userChoice.numericChar && userChoice.specialChar) {
-    charArr = charArr.concat(numericCharacters).concat(specialCharacters).concat(lowerCasedCharacters)
+    charArr = charArr.concat(lowerCasedCharacters).concat(numericCharacters).concat(specialCharacters)
   }
   else if (userChoice.uppercaseChar && userChoice.numericChar && userChoice.specialChar) {
     charArr = charArr.concat(upperCasedCharacters).concat(numericCharacters).concat(specialCharacters)
+  }
+  else if (userChoice.lowercaseChar && userChoice.uppercaseChar && userChoice.specialChar) {
+    charArr = charArr.concat(lowerCasedCharacters).concat(upperCasedCharacters).concat(specialCharacters)
   }
   else if (userChoice.lowercaseChar && userChoice.uppercaseChar) {
         charArr = charArr.concat(lowerCasedCharacters).concat(upperCasedCharacters)
